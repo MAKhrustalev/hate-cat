@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Если кот, то мультяшный!</title>
+    <link rel="icon" type="image/x-icon" href="/images/black-cat-favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./components/catCardPopup.js" defer></script>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <header>
+    <a href="" class="logo">
+      <img src="images/black-cat-favicon.png" alt="" /> Если кот, то
+      мультяшный!</a
+    >
+    <!-- <a class="btn" id="reload-page"> Обновить данные с сервера </a> -->
+    <!-- Кнопка - открыть окно для ввода котиков -->
+    <nav class="control">
+      <i class="fa-solid fa-circle-plus add-btn" title="Добавить кота"></i>
+    </nav>
+  </header>
+  <body>
+    <!-- Кнопка - открыть окно для ввода котиков -->
+    <!-- <nav class="control">
+      <i class="fa-solid fa-circle-plus add-btn" title="Добавить кота"></i>
+    </nav> -->
+    <div class="container">
+      <!-- 1) содаем разметку первой карточки. Создана временно для примера - в базе
+      ее нет -->
+      <!-- <div class="card default">
+        <i class="fa-solid fa-heart card__like"></i>
+        <h3>Ириска</h3>
+        <span>3 года</span>
+      </div> -->
+    </div>
+    <footer>
+      <nav>
+        <a href=""><i class="fa-brands fa-github"></i></a>
+        <a href=""><i class="fa-brands fa-vk"></i></a>
+        <a href=""><i class="fa-brands fa-telegram"></i></a>
+        <a href="">Maxim Khrustalev</a>
+      </nav>
+    </footer>
+    <!-- Модальное окно для ввода котиков -->
+    <div class="modal-container">
+      <div class="modal">
+        <i class="fa-regular fa-circle-xmark modal-close"></i>
+        <h2>Добавить котяру</h2>
+        <form id="add">
+          <input type="number" name="id" placeholder="ID кота" required />
+          <input type="text" name="name" placeholder="Имя кота" required />
+          <input type="text" name="image" placeholder="Картинка" />
+          <input type="number" name="age" placeholder="Возраст" />
+          <input
+            type="number"
+            name="rate"
+            placeholder="Рейтинг"
+            min="0"
+            max="10"
+          />
+          <label>
+            <input type="checkbox" name="favorite" />
+            Нравится
+          </label>
+          <textarea
+            name="description"
+            placeholder="Информация о коте"
+          ></textarea>
+          <button type="submit">Добавить</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Тут будут храниться все глобальные переменные (html-теги) -->
+    <script src="js/global.js"></script>
+    <script src="script.js"></script>
+    <script src="js/addForm.js"></script>
+  </body>
+</html>
+
+<!-- 2) Подключить fontawessome можно через cdnjs.com -сайт ссылок на бесплатные иконки и т.п
+Важно - заходить и копировать самому, тк использование привязано к ПК -->
+<!-- 3) скачать заглушку - Выбрать - цвет -  прозрачный, тип - клип-арт -->
