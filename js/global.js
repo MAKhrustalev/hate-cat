@@ -2,11 +2,24 @@
 
 // 5) Создаем контейнеры для котов
 const box = document.querySelector(".container");
+
 const addBtn = document.querySelector(".add-btn");
 const mdBox = document.querySelector(".modal-container");
 const mdClose = mdBox.querySelector(".modal-close");
-const addForm = document.forms.add;
+const addForm = document.forms.add; // add row55 index.html
 
+// const updateBtn = event.target.parentElement.parentElement;
+// const target = event.target;
+// const updateBtn = document.getElementsByClassName(
+//   "fa-solid fa-edit card__update"
+// );
+const mdBoxUpdate = document.querySelector(".modal-container-update");
+const mdUpdClose = mdBoxUpdate.querySelector(".modal-update-close");
+const updateForm = document.forms.update; // add row84 index.html
+
+// console.log(updateBtn);
+
+console.log(updateForm);
 // // const user = "MAKhrustalev"; // мой набор котов - статичный юзер
 // const path = `https://cats.petiteweb.dev/api/single/${user}`;
 
@@ -34,11 +47,11 @@ const path = `https://cats.petiteweb.dev/api/single/${user}`;
         Иначе - отправлять сетевой запрос и просить данные с котами (у БД)
 */
 let cats = localStorage.getItem("cats-data"); // получить массив с котами, чтобы проверить есть ли он
-console.log(cats);
+// console.log(cats);
 if (cats) {
   try {
     cats = JSON.parse(cats); //сделать из строки объект
-    console.log(cats);
+    // console.log(cats);
     for (let cat of cats) {
       createCard(cat, box);
       console.log(cat);
@@ -94,3 +107,6 @@ if (cats) {
 // 4БДЗ + ГП => отл
 // 4БДЗ (2+) => хор
 // 3БДЗ (1+) => уд
+
+console.log(1);
+console.log(path);

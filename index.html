@@ -76,11 +76,51 @@
         </form>
       </div>
     </div>
+    <!-- Модальное окно для изменения котиков -->
+    <div class="modal-container-update">
+      <div class="modal-update">
+        <i class="fa-regular fa-circle-xmark modal-update-close"></i>
+        <h2>Изменить котяру</h2>
+        <form id="update">
+          <input
+            type="number"
+            name="id-update"
+            placeholder="ID кота"
+            required
+          />
+          <input
+            type="text"
+            name="name-update"
+            placeholder="Имя кота"
+            required
+          />
+          <input type="text" name="image-update" placeholder="Картинка" />
+          <input type="number" name="age-update" placeholder="Возраст" />
+          <input
+            type="number"
+            name="rate-update"
+            placeholder="Рейтинг"
+            min="0"
+            max="10"
+          />
+          <label>
+            <input type="checkbox" name="favorite-update" />
+            Нравится
+          </label>
+          <textarea
+            name="description-update"
+            placeholder="Информация о коте"
+          ></textarea>
+          <button type="submit" name="submit-update">Изменить</button>
+        </form>
+      </div>
+    </div>
 
     <!-- Тут будут храниться все глобальные переменные (html-теги) -->
     <script src="js/global.js"></script>
     <script src="script.js"></script>
     <script src="js/addForm.js"></script>
+    <!-- <script src="js/updateForm.js"></script> -->
   </body>
 </html>
 

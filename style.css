@@ -106,18 +106,18 @@ h3 {
   display: inline;
 }
 .card__trash,
-.card__edit,
+.card__update,
 .card__view {
   /* position: absolute; */
   /* right: 8px; */
   /* bottom: 8px; */
   cursor: pointer;
-  color: grey;
+  color: coral;
 }
 .card__trash:hover,
-.card__edit:hover,
+.card__update:hover,
 .card__view:hover {
-  color: coral;
+  color: grey;
 }
 .card h3 {
   margin-bottom: 5px;
@@ -139,7 +139,8 @@ h3 {
   content: "...";
 }
 /* Модальное окно */
-.modal-container {
+.modal-container,
+.modal-container-update {
   position: fixed;
   background-color: #0008;
   /*  Размытие фона под модалом */
@@ -154,7 +155,8 @@ h3 {
   /* Чтобы не показвать модалку пока не вызвали открытие!!! */
   display: none;
 }
-.modal {
+.modal,
+.modal-update {
   background-color: bisque;
   padding: 30px;
   border-radius: 8px;
@@ -163,20 +165,24 @@ h3 {
   max-height: calc(100% - 60px);
   position: relative;
 }
-.modal h2 {
+.modal h2,
+.modal-update h2 {
   margin-top: 0;
 }
-.modal-close {
+.modal-close,
+.modal-update-close {
   position: absolute;
   right: 10px;
   top: 10px;
   font-size: 1.4rem;
   cursor: pointer;
 }
-.modal-close:hover {
+.modal-close:hover,
+.modal-update-close:hover {
   color: coral;
 }
-.modal form {
+.modal form,
+.modal-update form {
   display: grid;
   gap: 10px;
 }
@@ -266,13 +272,14 @@ textarea {
 }
 .popup-wrapper-cat-card.active {
   display: flex;
+  flex-direction: column;
 }
 .popup-cat-card {
   width: calc(100% - 20px);
   max-height: calc(100% - 20px);
   overflow-y: auto;
   box-sizing: border-box;
-  max-width: 600px;
+  max-width: 300px;
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
@@ -281,6 +288,7 @@ textarea {
 }
 .popup-cat-card.active {
   display: block;
+  height: 400px;
 }
 .popup-close-cat-card {
   width: max-content;

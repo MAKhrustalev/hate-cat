@@ -3,6 +3,7 @@
 function createCard(cat, el = box) {
   const card = document.createElement("div");
   card.className = "card";
+  card.id = cat.id; // добавил id
   if (!cat.image) {
     card.classList.add("default");
   } else {
@@ -59,22 +60,22 @@ function createCard(cat, el = box) {
   // переменная view
   const view = document.createElement("i");
   view.className = "fa-solid fa-eye card__view";
-  view.addEventListener("click", (e) => {
-    // событие по клику - просмотр карточки
-    e.stopPropagation();
-    // deleteCard(???, e.currentTarget.parentElement);
-    viewCard(cat.id, card);
-  });
+  // view.addEventListener("click", (e) => {
+  //   // событие по клику - просмотр карточки
+  //   e.stopPropagation();
+  //   // deleteCard(???, e.currentTarget.parentElement);
+  //   viewCard(cat.id, card);
+  // });
 
-  // переменная Update
+  // переменная update
   const update = document.createElement("i");
-  update.className = "fa-solid fa-edit card__edit";
-  update.addEventListener("click", (e) => {
-    //   // событие по клику - просмотр карточки
-    e.stopPropagation();
-    //   // deleteCard(???, e.currentTarget.parentElement);
-    updateCard(cat.id, card);
-  });
+  update.className = "fa-solid fa-edit card__update";
+  // update.addEventListener("click", (e) => {
+  //   //   // событие по клику - просмотр карточки
+  //   e.stopPropagation();
+  //   //   // deleteCard(???, e.currentTarget.parentElement);
+  //   updateCard(cat.id, card);
+  // });
 
   // добавить элементы на карточку сердечко, имя, корзину, глаз
   handle.append(update, view, trash);
@@ -122,7 +123,21 @@ const openCatCardPopup = (catResult) => {
   });
 };
 
-// Функция заполнения модального окна конкретного кота
+// Открыть модальное окно для изменения конкретного кота
+const openCatCardPopupUpdate = (catResult) => {
+  const container = document.getElementsByClassName("container")[0];
+  container.insertAdjacentHTML("afterbegin", generateCatCardPopup(catResult));
+
+  let catPopup = document.querySelector(".popup-wrapper-cat-card");
+  // Закрыть всплывающее окно с котом (внутри функции открытия)
+  let closeCatPopup = document.querySelector(".popup-close-cat-card");
+
+  closeCatPopup.addEventListener("click", () => {
+    catPopup.remove();
+  });
+};
+
+// Функция заполнения модального окна view конкретного кота
 function viewCard(id) {
   if (id) {
     // если есть id
@@ -145,24 +160,50 @@ function viewCard(id) {
   }
 }
 
-// document
-//   .getElementsByClassName("container")[0]
-//   .addEventListener("click", (event) => {
-//     if (event.target.className === "fa-solid fa-eye card__view") {
-//       console.log(id);
-//       //  синхронная функция просмотра кота
-//       viewCard(cat.id, card).then((res) => {
-//         console.log(res);
-//         openCatCardPopup(res);
-//       });
-//     }
-//   });
+// Функция заполнения модального окна update конкретного кота ?????????????????????
+function previewCard(id) {
+  if (id) {
+    // если есть id
+    fetch(`${path}/show/${id}`)
+      .then((res) => {
+        mdBoxUpdate.style.display = "flex";
+        return res.ok ? res.json() : Promise.reject("Ктопроблема");
+      })
+      .then((catResult) => {
+        document.getElementsByName("id-update")[0].innerText = catResult.id;
+        document.getElementsByName("name-update")[0].innerText = catResult.name;
+        console.log(catResult.name);
+        document.getElementsByName("description-update")[0].innerText =
+          catResult.description;
+        document.getElementsByName("age-update")[0].innerText = catResult.age;
+        document.getElementsByName("rate-update")[0].innerText = catResult.rate;
 
-// document
-//   .getElementsByClassName("container")[0]
-//   .addEventListener("click", (event) => {
-//     console.log(event.target.className);
-//   });
+        document.getElementsByName("id-update")[0].placeholder = catResult.id;
+        document.getElementsByName("name-update")[0].placeholder =
+          catResult.name;
+        document.getElementsByName("image-update")[0].placeholder =
+          catResult.image;
+        document.getElementsByName("description-update")[0].placeholder =
+          catResult.description;
+        document.getElementsByName("age-update")[0].placeholder = catResult.age;
+        document.getElementsByName("rate-update")[0].placeholder =
+          catResult.rate;
+      });
+  }
+}
+// Функция  update конкретного кота ?????????????????????
+updateCat = (id) => {
+  return fetch(`${path}/update/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject("У меня лапки");
+    console.log(res);
+  });
+};
 
 // 8) !!!!!!!!!!!!!!!!!!!Добавить мою базу котов!!!!!!!!!
 
@@ -257,24 +298,29 @@ if (cats) {
     });
 }
 
-// 11) Фунция редактирования карточки с котом ?????????????????????????????????????????????????
-mdBox.addEventListener;
-function updateCard(id, el = box) {
-  if (id) {
-    // если есть id
-    fetch(`${path}/update/${id}`, {
-      method: "PUT",
-    }).then((res) => {
-      // openCatCardPopup(res);
+document
+  .getElementsByClassName("container")[0]
+  .addEventListener("click", (event) => {
+    const cardClicked = event.target.parentElement.parentElement;
+    const buttonClicked = event.target;
 
-      // viewCard(id);
-      // console.log(res);
-      // console.log(res.status);
-      if (res.status === 200) {
-        // el.remove();
-        // cats = cats.filter((c) => c.id !== id); //только коты с id не сопадающим с id удаленного
-        localStorage.setItem("cats-data", JSON.stringify(cats)); // перезаписываем глобальную переменную
+    console.log(cardClicked);
+    console.log(buttonClicked.tagName);
+    if (event.target.tagName === "I") {
+      if (buttonClicked.className === "fa-solid fa-eye card__view") {
+        //  синхронная функция просмотра кота
+        viewCard(cardClicked.id);
+      } else if (buttonClicked.className === "fa-solid fa-edit card__update") {
+        //  синхронная функция изменения кота %%% сделать
+        previewCard(cardClicked.id);
+        // updateCat(cardClicked.id);
+      } else if (buttonClicked.className === "fa-solid fa-trash card__trash") {
+        //  синхронная функция удаления кота
+        // api.deleteCat(event.target.value).then((res) => {
+        //   console.log(res);
+        //   deleteCatFromLocalStorage(event.target.value);
+        //   refreshCatsAndContentSync();
+        // });
       }
-    });
-  }
-}
+    }
+  });
