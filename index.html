@@ -82,36 +82,26 @@
         <i class="fa-regular fa-circle-xmark modal-update-close"></i>
         <h2>Изменить котяру</h2>
         <form id="update">
+          <input type="number" name="id" placeholder="ID кота" required />
+          <input type="text" name="name" placeholder="Имя кота" required />
+          <input type="text" name="image" placeholder="Картинка" />
+          <input type="number" name="age" placeholder="Возраст" />
           <input
             type="number"
-            name="id-update"
-            placeholder="ID кота"
-            required
-          />
-          <input
-            type="text"
-            name="name-update"
-            placeholder="Имя кота"
-            required
-          />
-          <input type="text" name="image-update" placeholder="Картинка" />
-          <input type="number" name="age-update" placeholder="Возраст" />
-          <input
-            type="number"
-            name="rate-update"
+            name="rate"
             placeholder="Рейтинг"
             min="0"
             max="10"
           />
           <label>
-            <input type="checkbox" name="favorite-update" />
+            <input type="checkbox" name="favorite" />
             Нравится
           </label>
           <textarea
-            name="description-update"
+            name="description"
             placeholder="Информация о коте"
           ></textarea>
-          <button type="submit" name="submit-update">Изменить</button>
+          <button type="submit" name="submit">Изменить</button>
         </form>
       </div>
     </div>
@@ -120,7 +110,7 @@
     <script src="js/global.js"></script>
     <script src="script.js"></script>
     <script src="js/addForm.js"></script>
-    <!-- <script src="js/updateForm.js"></script> -->
+    <script src="js/updateForm.js"></script>
   </body>
 </html>
 

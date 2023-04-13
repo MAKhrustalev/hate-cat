@@ -170,40 +170,37 @@ function previewCard(id) {
         return res.ok ? res.json() : Promise.reject("Ктопроблема");
       })
       .then((catResult) => {
-        document.getElementsByName("id-update")[0].innerText = catResult.id;
-        document.getElementsByName("name-update")[0].innerText = catResult.name;
+        document.getElementsByName("id")[0].innerText = catResult.id;
+        document.getElementsByName("name")[0].innerText = catResult.name;
         console.log(catResult.name);
-        document.getElementsByName("description-update")[0].innerText =
+        document.getElementsByName("description")[0].innerText =
           catResult.description;
-        document.getElementsByName("age-update")[0].innerText = catResult.age;
-        document.getElementsByName("rate-update")[0].innerText = catResult.rate;
+        document.getElementsByName("age")[0].innerText = catResult.age;
+        document.getElementsByName("rate")[0].innerText = catResult.rate;
 
-        document.getElementsByName("id-update")[0].placeholder = catResult.id;
-        document.getElementsByName("name-update")[0].placeholder =
-          catResult.name;
-        document.getElementsByName("image-update")[0].placeholder =
-          catResult.image;
-        document.getElementsByName("description-update")[0].placeholder =
+        document.getElementsByName("id")[0].placeholder = catResult.id;
+        document.getElementsByName("name")[0].placeholder = catResult.name;
+        document.getElementsByName("image")[0].placeholder = catResult.image;
+        document.getElementsByName("description")[0].placeholder =
           catResult.description;
-        document.getElementsByName("age-update")[0].placeholder = catResult.age;
-        document.getElementsByName("rate-update")[0].placeholder =
-          catResult.rate;
+        document.getElementsByName("age")[0].placeholder = catResult.age;
+        document.getElementsByName("rate")[0].placeholder = catResult.rate;
       });
   }
 }
 // Функция  update конкретного кота ?????????????????????
-updateCat = (id) => {
-  return fetch(`${path}/update/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(id),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject("У меня лапки");
-    console.log(res);
-  });
-};
+// updateCat = (id) => {
+//   return fetch(`${path}/update/${id}`, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(id),
+//   }).then((res) => {
+//     return res.ok ? res.json() : Promise.reject("У меня лапки");
+//     console.log(res);
+//   });
+// };
 
 // 8) !!!!!!!!!!!!!!!!!!!Добавить мою базу котов!!!!!!!!!
 
@@ -313,6 +310,7 @@ document
       } else if (buttonClicked.className === "fa-solid fa-edit card__update") {
         //  синхронная функция изменения кота %%% сделать
         previewCard(cardClicked.id);
+        updateItem(cardClicked.id);
         // updateCat(cardClicked.id);
       } else if (buttonClicked.className === "fa-solid fa-trash card__trash") {
         //  синхронная функция удаления кота
