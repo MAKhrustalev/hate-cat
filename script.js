@@ -1,5 +1,5 @@
-// 6) Функция создание карточки одного кота
-// 7 Поскольку котов много - завернуть это в  функцию
+// Функция создание карточки одного кота
+// Поскольку котов много - завернуть это в  функцию
 function createCard(cat, el = box) {
   const card = document.createElement("div");
   card.className = "card";
@@ -15,7 +15,7 @@ function createCard(cat, el = box) {
   const like = document.createElement("i");
   like.className = "fa-heart card__like";
   like.classList.add(cat.favorite ? "fa-solid" : "fa-regular");
-  // 10) Установка лайка на сердечко
+  // Установка лайка на сердечко
   like.addEventListener("click", (e) => {
     e.stopPropagation(); // чтобы нажатие на сердце,не запускало
     //  нажатие на карточку и ее удаление
@@ -103,7 +103,7 @@ function deleteCard(id, el) {
       if (res.status === 200) {
         el.remove();
         cats = cats.filter((c) => c.id !== id); //только коты с id не сопадающим с id удаленного
-        localStorage.setItem("cats-data", JSON.stringify(cats)); // перезаписываем глобальную переменную
+        localStorage.setItem("cats-data", JSON.stringify(cats)); // перезаписываем локальную переменную
       }
     });
   }
@@ -160,7 +160,7 @@ function viewCard(id) {
   }
 }
 
-// Функция заполнения модального окна update конкретного кота ?????????????????????
+// Функция заполнения модального окна update конкретного кота
 function previewCard(id) {
   if (id) {
     // если есть id
@@ -169,39 +169,26 @@ function previewCard(id) {
         mdBoxUpdate.style.display = "flex";
         return res.ok ? res.json() : Promise.reject("Ктопроблема");
       })
-      .then((catResult) => {
-        document.getElementsByName("id")[0].innerText = catResult.id;
-        document.getElementsByName("name")[0].innerText = catResult.name;
-        console.log(catResult.name);
-        document.getElementsByName("description")[0].innerText =
-          catResult.description;
-        document.getElementsByName("age")[0].innerText = catResult.age;
-        document.getElementsByName("rate")[0].innerText = catResult.rate;
+      .then((res) => {
+        console.log(updateForm);
+        updateForm.querySelector('input[name="id"]').placeholder = res.id;
+        updateForm.querySelector('input[name="name"]').placeholder = res.name;
+        updateForm.querySelector('input[name="image"]').placeholder = res.image;
+        updateForm.querySelector('input[name="age"]').placeholder = res.age;
+        updateForm.querySelector('input[name="rate"]').placeholder = res.rate;
+        updateForm.querySelector('textarea[name="description"]').placeholder =
+          res.description;
 
-        document.getElementsByName("id")[0].placeholder = catResult.id;
-        document.getElementsByName("name")[0].placeholder = catResult.name;
-        document.getElementsByName("image")[0].placeholder = catResult.image;
-        document.getElementsByName("description")[0].placeholder =
-          catResult.description;
-        document.getElementsByName("age")[0].placeholder = catResult.age;
-        document.getElementsByName("rate")[0].placeholder = catResult.rate;
+        console.log(res.image);
+        console.log(updateForm.querySelector('input[name="name"]').placeholder);
       });
   }
 }
-// Функция  update конкретного кота ?????????????????????
-// updateCat = (id) => {
-//   return fetch(`${path}/update/${id}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(id),
-//   }).then((res) => {
-//     return res.ok ? res.json() : Promise.reject("У меня лапки");
-//     console.log(res);
-//   });
-// };
 
+// Закрытие update формы крестиком
+mdUpdClose.addEventListener("click", (e) => {
+  mdBoxUpdate.style = null;
+});
 // 8) !!!!!!!!!!!!!!!!!!!Добавить мою базу котов!!!!!!!!!
 
 /*
@@ -294,7 +281,7 @@ if (cats) {
       }
     });
 }
-
+// console.log(localStorage.getItem("cats-data"));
 document
   .getElementsByClassName("container")[0]
   .addEventListener("click", (event) => {
@@ -311,7 +298,9 @@ document
         //  синхронная функция изменения кота %%% сделать
         previewCard(cardClicked.id);
         updateItem(cardClicked.id);
-        // updateCat(cardClicked.id);
+        localStorage.setItem("cats-data", JSON.stringify(cats)); // перезаписываем глобальную переменную
+        // sessionStorage.setItem("cats-data", JSON.stringify(cats)); // перезаписываем глобальную переменную
+        // на странице обновление почему-то отлько после перезагрузки
       } else if (buttonClicked.className === "fa-solid fa-trash card__trash") {
         //  синхронная функция удаления кота
         // api.deleteCat(event.target.value).then((res) => {

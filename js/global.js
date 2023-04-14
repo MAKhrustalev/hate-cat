@@ -8,11 +8,6 @@ const mdBox = document.querySelector(".modal-container");
 const mdClose = mdBox.querySelector(".modal-close");
 const addForm = document.forms.add; // add row55 index.html
 
-// const updateBtn = event.target.parentElement.parentElement;
-// const target = event.target;
-// const updateBtn = document.getElementsByClassName(
-//   "fa-solid fa-edit card__update"
-// );
 const mdBoxUpdate = document.querySelector(".modal-container-update");
 const mdUpdClose = mdBoxUpdate.querySelector(".modal-update-close");
 const updateForm = document.forms.update; // add row84 index.html

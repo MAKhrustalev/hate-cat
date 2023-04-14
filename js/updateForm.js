@@ -1,15 +1,4 @@
 // Действие при нажатии кнопки Изменить кота
-// addBtn.addEventListener("click", (e) => {
-//   mdBox.style.display = "flex";
-// });
-// updateBtn.addEventListener("click", (e) => {
-//   mdBox.style.display = "flex";
-// });
-
-// mdUpdClose.addEventListener("click", (e) => {
-//   mdBox.style = null;
-// });
-
 /*
     По умолчанию форма отправляется на сервер get-запросом по адресу атрибута action 
     (если он отсутсвует или пустой - страница перезагрузится)
@@ -21,7 +10,7 @@ function updateItem() {
     // console.log(addForm.children); // получить дочерние теги (прямые потомки)
     // console.log(addForm.elements); // получить все элементы формы (input/select/textarea/button)
 
-    for (let i = 0; i < addForm.elements.length; i++) {
+    for (let i = 0; i < updateForm.elements.length; i++) {
       const upd = updateForm.elements[i];
       console.log(upd);
       // на сервер отправляются name=value
@@ -37,9 +26,7 @@ function updateItem() {
         }
       }
     }
-    console.log(body);
-    // console.log(upd.id);
-    // console.log(upd.id - update);
+
     // Добавление карточки с новым котом, изменение фунции addCat
     fetch(`${path}/update/${body.id}`, {
       method: "PUT",
@@ -53,14 +40,7 @@ function updateItem() {
         // если ответ сервера ОК - такого номера в списке котов нет
         updateForm.reset(); // очистить модальную форму
         mdBoxUpdate.style = null; // закрыть модальную форму
-        // createCard(body); // создать картчоку с новым котом
-        // cats.push(body);
-        console.log(JSON.stringify(body));
-        // localStorage.setItem("cats-data", JSON.stringify(cats)); // перезаписываем глобальную переменную
         localStorage.setItem("cats-data", JSON.stringify(body)); // перезаписываем глобальную переменную
-        // } else {
-        //   return res.json(); // если ответ такой id уже есть
-        // }
       })
       .then((err) => {
         if (err && err.message) {
